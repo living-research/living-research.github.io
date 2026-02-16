@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="description" content="Living Research — research as repositories, not documents. Reproducible, versioned, continuously published.">
+  <title>Living Research</title>
+  <style>
+    :root {
+      --fg: #0a0a0a;
+      --fg-muted: #525252;
+      --fg-faint: #a3a3a3;
+      --bg: #fafafa;
+      --bg-raised: #f0f0f0;
+      --bg-code: #e8e8e8;
+      --border: #d4d4d4;
+      --accent: #16a34a;
+      --accent-dim: rgba(22, 163, 74, 0.12);
+      --space-xs: 0.375rem;
+      --space-sm: 0.75rem;
+      --space-md: 1.25rem;
+      --space-lg: 2.5rem;
+      --space-xl: 5rem;
+      --space-2xl: 8rem;
+      --measure: 38rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #e5e5e5;
+        --fg-muted: #a3a3a3;
+        --fg-faint: #636363;
+        --bg: #0a0a0a;
+        --bg-raised: #171717;
+        --bg-code: #1c1c1c;
+        --border: #2e2e2e;
+        --accent: #4ade80;
+        --accent-dim: rgba(74, 222, 128, 0.1);
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site {
+      max-width: var(--measure);
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    /* — Hero — */
+
+    .hero {
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 6vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-dot {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      margin-top: var(--space-md);
+      font-size: 1.125rem;
+      color: var(--fg-muted);
+      max-width: 32rem;
+    }
+
+    /* — Sections — */
+
+    .section {
+      padding-top: var(--space-xl);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: var(--space-md);
+    }
+
+    .section-heading {
+      font-size: 1.375rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: var(--space-md);
+    }
+
+    /* — Problem list — */
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .problem-list li {
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--border);
+      color: var(--fg-muted);
+      line-height: 1.45;
+    }
+
+    /* — Alternative — */
+
+    .alt-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .alt-list li {
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--accent);
+      line-height: 1.45;
+    }
+
+    .alt-emphasis {
+      font-weight: 600;
+    }
+
+    /* — Tree — */
+
+    .tree-block {
+      margin-top: var(--space-lg);
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: var(--space-md);
+      overflow-x: auto;
+    }
+
+    .tree-block pre {
+      font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--fg-muted);
+    }
+
+    .tree-accent {
+      color: var(--accent);
+    }
+
+    .tree-comment {
+      color: var(--fg-faint);
+    }
+
+    /* — Principles — */
+
+    .principles {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .principles li {
+      line-height: 1.45;
+    }
+
+    .principle-name {
+      font-weight: 600;
+      display: block;
+    }
+
+    .principle-desc {
+      color: var(--fg-muted);
+    }
+
+    /* — CTA — */
+
+    .cta {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--border);
+      margin-top: var(--space-xl);
+    }
+
+    .cta-text {
+      color: var(--fg-muted);
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .cta-link-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .cta-link-primary:hover {
+      background: #15803d;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .cta-link-primary {
+        color: #0a0a0a;
+      }
+      .cta-link-primary:hover {
+        background: #86efac;
+      }
+    }
+
+    .cta-link-secondary {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .cta-link-secondary:hover {
+      background: var(--bg-raised);
+    }
+
+    .cta-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* — Footer — */
+
+    .footer {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+      color: var(--fg-faint);
+    }
+
+    /* — Reduced motion — */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+
+    <header class="hero">
+      <h1 class="hero-title">Living Research<span class="hero-dot">.</span></h1>
+      <p class="hero-subtitle">When AI makes text trivial, the value is in reproducible data and verifiable code. Research belongs in repositories, not documents.</p>
+    </header>
+
+    <section class="section" aria-labelledby="problem-label">
+      <p class="section-label" id="problem-label">The problem</p>
+      <ul class="problem-list">
+        <li>Papers freeze knowledge into static PDFs that can't be verified, updated, or rerun.</li>
+        <li>Results sit behind paywalls while the code and data to reproduce them are missing.</li>
+        <li>Peer review happens behind closed doors between two anonymous reviewers.</li>
+        <li>By the time a paper is published, the field has already moved on.</li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="alt-label">
+      <p class="section-label" id="alt-label">The alternative</p>
+      <ul class="alt-list">
+        <li><span class="alt-emphasis">Data and code are the source of truth</span> — not a narrative describing them.</li>
+        <li><span class="alt-emphasis">Experiments rerun automatically</span> via CI on every change.</li>
+        <li><span class="alt-emphasis">Findings publish continuously</span> to a living page, not a frozen PDF.</li>
+        <li><span class="alt-emphasis">Git history is the intellectual record</span> — every commit traces how thinking evolved.</li>
+        <li><span class="alt-emphasis">Contributions happen through issues and PRs</span> — transparent, attributable, open.</li>
+      </ul>
+
+      <div class="tree-block" role="figure" aria-label="Template repository structure">
+        <pre><span class="tree-accent">living-research/template</span>
+├── data/
+│   ├── raw/            <span class="tree-comment"># immutable source data</span>
+│   └── processed/      <span class="tree-comment"># derived datasets, reproduced by CI</span>
+├── experiments/        <span class="tree-comment"># analysis scripts</span>
+├── docs/               <span class="tree-comment"># published findings via GitHub Pages</span>
+├── .github/workflows/  <span class="tree-comment"># CI that reruns experiments on every push</span>
+├── Makefile            <span class="tree-comment"># make run</span>
+└── requirements.txt</pre>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="principles-label">
+      <p class="section-label" id="principles-label">Principles</p>
+      <ul class="principles">
+        <li>
+          <span class="principle-name">Reproducibility by default.</span>
+          <span class="principle-desc">If it can't rerun, it's not research.</span>
+        </li>
+        <li>
+          <span class="principle-name">Living, not frozen.</span>
+          <span class="principle-desc">New data comes in? Update the repo. Found a flaw? Open an issue. Knowledge evolves.</span>
+        </li>
+        <li>
+          <span class="principle-name">Show the work.</span>
+          <span class="principle-desc">Dead ends, pivots, negative results — the history is as valuable as the conclusion.</span>
+        </li>
+        <li>
+          <span class="principle-name">Credit through contribution.</span>
+          <span class="principle-desc">Git tracks who did what. No ambiguous author lists.</span>
+        </li>
+        <li>
+          <span class="principle-name">Text serves the data.</span>
+          <span class="principle-desc">Every sentence must add information not already present in the code or results.</span>
+        </li>
+      </ul>
+    </section>
+
+    <div class="cta">
+      <p class="cta-text">The published page is a view of the research. The repo is the research.</p>
+      <nav class="cta-links" aria-label="Get started">
+        <a href="https://github.com/living-research/template" class="cta-link cta-link-primary">Use the template</a>
+        <a href="https://github.com/living-research" class="cta-link cta-link-secondary">View the org</a>
+      </nav>
+    </div>
+
+    <footer class="footer">
+      <p>Living Research is open source.</p>
+    </footer>
+
+  </main>
+</body>
+</html>
