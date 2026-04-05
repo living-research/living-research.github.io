@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1c1917">
-  <meta name="description" content="Living Research — research as repositories, not documents. Reproducible, versioned, continuously published.">
+  <meta name="description" content="Living Research — research as repositories, not documents. Notebooks run, results publish, findings stay current.">
   <title>Living Research</title>
   <style>
     :root {
@@ -62,8 +62,6 @@
       padding: var(--space-2xl) var(--space-lg);
     }
 
-    /* --- Header --- */
-
     .hero {
       padding-bottom: var(--space-xl);
       border-bottom: 1px solid var(--rule);
@@ -84,8 +82,6 @@
       max-width: 34rem;
     }
 
-    /* --- Section labels --- */
-
     .label {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       font-size: 0.6875rem;
@@ -99,8 +95,6 @@
     .section {
       padding-top: var(--space-xl);
     }
-
-    /* --- Lists --- */
 
     .evidence-list {
       list-style: none;
@@ -135,8 +129,6 @@
       font-weight: 600;
     }
 
-    /* --- Principles --- */
-
     .principles {
       list-style: none;
       display: flex;
@@ -157,8 +149,6 @@
     .principles .desc {
       color: var(--text-secondary);
     }
-
-    /* --- Code block --- */
 
     .tree {
       margin-top: var(--space-lg);
@@ -183,8 +173,6 @@
       color: var(--text-faint);
     }
 
-    /* --- Links --- */
-
     a {
       color: var(--accent);
       text-decoration: underline;
@@ -200,8 +188,6 @@
       outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
-
-    /* --- CTA --- */
 
     .cta {
       padding-top: var(--space-xl);
@@ -244,8 +230,6 @@
       outline-offset: 2px;
     }
 
-    /* --- Footer --- */
-
     footer {
       margin-top: var(--space-2xl);
       padding-top: var(--space-md);
@@ -257,8 +241,6 @@
       font-size: 0.8125rem;
       color: var(--text-faint);
     }
-
-    /* --- Responsive --- */
 
     @media (max-width: 640px) {
       .site {
@@ -287,7 +269,7 @@
 
     <header class="hero">
       <h1 class="hero-title">Living Research</h1>
-      <p class="hero-lede">When AI makes text trivial, the value is in reproducible data and verifiable code. Research belongs in repositories, not documents.</p>
+      <p class="hero-lede">A notebook runs. Its results publish to a page. The repo is the research. The page is a view of it.</p>
     </header>
 
     <section class="section" aria-labelledby="problem-heading">
@@ -301,26 +283,27 @@
       </ul>
     </section>
 
-    <section class="section" aria-labelledby="alt-heading">
-      <p class="label" id="alt-heading">The alternative</p>
+    <section class="section" aria-labelledby="how-heading">
+      <p class="label" id="how-heading">How it works</p>
       <ul class="alt-list">
-        <li><strong>Data and code are the source of truth</strong> — not a narrative describing them.</li>
-        <li><strong>Experiments rerun automatically</strong> via CI on every change.</li>
-        <li><strong>Findings publish continuously</strong> to a living page, not a frozen PDF.</li>
-        <li><strong>Git history is the intellectual record</strong> — every commit traces how thinking evolved.</li>
-        <li><strong>Contributions happen through issues and PRs</strong> — transparent, attributable, open.</li>
+        <li><strong>Notebooks are the primary artifact.</strong> Code, analysis, and explanation live together. Click a badge, run the full pipeline in Colab.</li>
+        <li><strong>Results publish back to the repo.</strong> A publish cell commits outputs and findings data. GitHub Pages deploys the updated page.</li>
+        <li><strong>CI validates, it doesn't produce.</strong> Workflows confirm notebooks still execute. The notebook is the source of truth, not CI.</li>
+        <li><strong>Git history is the intellectual record.</strong> Every commit traces how thinking evolved. Every contributor is attributed.</li>
+        <li><strong>Contributions happen through issues and PRs.</strong> Transparent, attributable, open.</li>
       </ul>
 
       <div class="tree" role="figure" aria-label="Template repository structure">
         <pre><span class="highlight">living-research/template</span>
+├── notebooks/         <span class="comment"># Jupyter notebooks — run end-to-end</span>
+├── scripts/           <span class="comment"># utilities (Colab publish flow)</span>
 ├── data/
-│   ├── raw/            <span class="comment"># immutable source data</span>
-│   └── processed/      <span class="comment"># derived datasets, reproduced by CI</span>
-├── experiments/        <span class="comment"># analysis scripts</span>
-├── docs/               <span class="comment"># published findings via GitHub Pages</span>
-├── .github/workflows/  <span class="comment"># CI reruns experiments on every push</span>
-├── Makefile            <span class="comment"># make run</span>
-└── requirements.txt</pre>
+│   ├── raw/           <span class="comment"># immutable source data</span>
+│   └── processed/     <span class="comment"># derived data, regenerated</span>
+├── results/           <span class="comment"># outputs: plots, models</span>
+├── docs/              <span class="comment"># findings page → GitHub Pages</span>
+│   └── data/          <span class="comment"># data the page reads at runtime</span>
+└── .github/workflows/ <span class="comment"># CI validates notebooks</span></pre>
       </div>
     </section>
 
@@ -333,19 +316,15 @@
         </li>
         <li>
           <strong>Living, not frozen.</strong>
-          <span class="desc">New data comes in? Update the repo. Found a flaw? Open an issue. Knowledge evolves.</span>
+          <span class="desc">New data? Update the notebook. Found a flaw? Open an issue. Knowledge evolves.</span>
         </li>
         <li>
           <strong>Show the work.</strong>
-          <span class="desc">Dead ends, pivots, negative results — the history is as valuable as the conclusion.</span>
+          <span class="desc">Dead ends, pivots, negative results. The history is as valuable as the conclusion.</span>
         </li>
         <li>
           <strong>Credit through contribution.</strong>
           <span class="desc">Git tracks who did what. No ambiguous author lists.</span>
-        </li>
-        <li>
-          <strong>Text serves the data.</strong>
-          <span class="desc">Every sentence must add information not already present in the code or results.</span>
         </li>
       </ul>
     </section>
